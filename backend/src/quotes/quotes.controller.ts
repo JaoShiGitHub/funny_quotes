@@ -9,7 +9,7 @@ export class QuotesController {
 
   @Get('all_quotes')
   async getQuotes() {
-  console.log('🔥 QuotesController is working');
+    //   console.log('🔥 QuotesController is working');
     try {
         const quotes_data = await this.quotesService.getQuotes();
         console.log("Quotes: ", quotes_data);
