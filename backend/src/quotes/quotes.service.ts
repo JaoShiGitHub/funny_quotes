@@ -10,6 +10,7 @@ export class QuotesService {
       SELECT 
         q.quote_id, 
         q.quote, 
+        q.votes,
         u.user_id AS author_id,
         u.username AS author
       FROM quotes q

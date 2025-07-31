@@ -1,4 +1,4 @@
-import { UseGuards, Controller, Get, Req } from '@nestjs/common';
+import { UseGuards, Controller, Get, Req, Post, Body } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import type { Request } from 'express';
@@ -41,8 +41,15 @@ export class UserController {
       };
     } catch (error) {
       return {
-         message: `Failed to get quotes: ${error.message}`
+        message: `Failed to get quotes: ${error.message}`,
       };
     }
+  }
+
+  @Post('new_quote')
+  async createQuote(@Req() req: Request, @Body() body) {
+    const userId = req['currentUser']?.id;
+
+    return this.userService.createNewQuote(userId, body.quote);
   }
 }
