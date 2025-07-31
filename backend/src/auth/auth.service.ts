@@ -31,7 +31,7 @@ export class AuthService {
       }
 
       const token = this.jwtService.sign(
-        { username: user.username },
+        { id: user.id, username: user.username },
         { expiresIn: '1d' },
       );
 

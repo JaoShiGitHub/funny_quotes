@@ -8,12 +8,11 @@ import { UserService } from './user.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import type { Request } from 'express';
 
-
+@UseGuards(AuthGuard)
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @UseGuards(AuthGuard)
   @Get('info')
   async getUserInfo(@Req() req: Request) {
     const userId = req['currentUser']?.id;
