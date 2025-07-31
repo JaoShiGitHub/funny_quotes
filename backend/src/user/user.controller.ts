@@ -1,4 +1,13 @@
-import { UseGuards, Controller, Get, Req, Post, Body } from '@nestjs/common';
+import {
+  UseGuards,
+  Controller,
+  Get,
+  Req,
+  Post,
+  Body,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import type { Request } from 'express';
@@ -51,5 +60,10 @@ export class UserController {
     const userId = req['currentUser']?.id;
 
     return this.userService.createNewQuote(userId, body.quote);
+  }
+
+  @Delete('quote/:id')
+  async deleteQuote(@Param('id') id: number) {
+    return this.userService.deleteQuote(id);
   }
 }

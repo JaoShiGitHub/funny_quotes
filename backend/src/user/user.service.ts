@@ -37,4 +37,17 @@ export class UserService {
       throw new Error('Could not create quote');
     }
   }
+
+  // Delete a quote
+  async deleteQuote(id: number) {
+    const result = await pool.query('DELETE FROM quotes WHERE quote_id = $1', [
+      id,
+    ]);
+
+    if (result.rowCount === 0) {
+      throw new NotFoundException(`Not found quote with ID ${id}`);
+    }
+
+    return { message: `Quote ${id} deleted successfully` };
+  }
 }
