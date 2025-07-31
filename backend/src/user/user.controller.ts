@@ -1,9 +1,4 @@
-import {
-  UseGuards,
-  Controller,
-  Get,
-  Req,
-} from '@nestjs/common';
+import { UseGuards, Controller, Get, Req } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import type { Request } from 'express';
@@ -29,6 +24,24 @@ export class UserController {
     } catch (error) {
       return {
         message: `Failed to get user info: ${error.message}`,
+      };
+    }
+  }
+
+  @Get('my_quotes')
+  async getMyQuotes(@Req() req: Request) {
+    const userId = req['currentUser']?.id;
+    const username = req['currentUser']?.username;
+
+    try {
+      const quotes_data = await this.userService.getQuotesById(userId);
+      return {
+        message: `${username}'s quotes have been fetched`,
+        quotes_data,
+      };
+    } catch (error) {
+      return {
+         message: `Failed to get quotes: ${error.message}`
       };
     }
   }
