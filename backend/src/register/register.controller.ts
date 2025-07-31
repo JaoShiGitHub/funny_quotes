@@ -22,7 +22,7 @@ constructor(private registerService: RegisterService) {}
       try {
 
         const response = await this.registerService.register(username, password);
-          console.log("Register checking: ", response);
+        console.log("Register checking: ", response);
         res.status(201).json(response);
       } catch (error) {
         console.error('Registration error:', error);

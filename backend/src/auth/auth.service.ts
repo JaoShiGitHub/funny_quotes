@@ -11,8 +11,6 @@ import { pool } from 'src/db/database';
 export class AuthService {
   constructor(private jwtService: JwtService) {}
 
-
-
   // LOGIN
   async login(username: string, password: string) {
     try {
@@ -22,7 +20,7 @@ export class AuthService {
 
       const user = data.rows[0];
 
-      if (!user || user.length === 0) {
+      if (!user) {
         throw new NotFoundException(`${username} not found`);
       }
 
@@ -33,11 +31,11 @@ export class AuthService {
       }
 
       const token = this.jwtService.sign(
-        { username: user.rows[0].username },
+        { username: user.username },
         { expiresIn: '1d' },
       );
 
-      return { user: user.rows[0], token };
+      return { user, token };
     } catch (error) {
       console.log('Login error: ', error);
       throw error;
