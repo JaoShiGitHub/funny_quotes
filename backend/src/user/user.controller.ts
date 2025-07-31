@@ -16,6 +16,10 @@ export class UserController {
   @Get('info')
   async getUserInfo(@Req() req: Request) {
     const userId = req['currentUser']?.id;
+
+    console.log('currentUser:', req['currentUser']);
+    console.log('userId:', userId);
+
     try {
       const user_data = await this.userService.getUserById(userId);
       return {

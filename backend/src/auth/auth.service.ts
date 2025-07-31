@@ -19,6 +19,7 @@ export class AuthService {
       ]);
 
       const user = data.rows[0];
+      console.log('User from DB:', user);
 
       if (!user) {
         throw new NotFoundException(`${username} not found`);
@@ -31,7 +32,7 @@ export class AuthService {
       }
 
       const token = this.jwtService.sign(
-        { id: user.id, username: user.username },
+        { id: user.user_id, username: user.username },
         { expiresIn: '1d' },
       );
 
