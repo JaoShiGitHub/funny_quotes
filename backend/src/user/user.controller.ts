@@ -8,9 +8,11 @@ import {
   Delete,
   Param,
   Put,
+  Res,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/auth/auth.guard';
+import type { Response } from 'express';
 import type { Request } from 'express';
 
 @UseGuards(AuthGuard)
@@ -68,6 +70,17 @@ export class UserController {
     const userId = req['currentUser']?.id;
 
     return this.userService.createNewQuote(userId, body.quote);
+  }
+
+  // POST /user/logout :  Log out the user
+   @Post('logout')
+  logout(@Res() res: Response) {
+    res.clearCookie('token', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+    });
+    return res.json({ message: 'Logged out' });
   }
 
   // ---------- PUT ----------
