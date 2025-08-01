@@ -10,18 +10,11 @@ export class QuotesController {
   @Get('all_quotes')
   async getQuotes() {
     //   console.log('🔥 QuotesController is working');
-    try {
-      const quotes_data = await this.quotesService.getQuotes();
-      console.log('Quotes: ', quotes_data);
+    const quotes_data = await this.quotesService.getQuotes();
 
-      return {
-        message: 'All quotes fetched successfully',
-        quotes_data,
-      };
-    } catch (error) {
-      return {
-        message: `Failed to get quotes`,
-      };
-    }
+    return {
+      message: 'All quotes fetched successfully',
+      quotes_data,
+    };
   }
 }

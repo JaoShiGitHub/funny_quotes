@@ -27,6 +27,6 @@ export class AuthController {
       secure: false,
     });
 
-    return res.json({ user: user.user });
+    return res.status(200).json({ user: user.user });
   }
 }

@@ -18,6 +18,9 @@ import type { Request } from 'express';
 export class UserController {
   constructor(private userService: UserService) {}
 
+  // ---------- GET ----------
+  
+  // GET /user/info :  Fetch user data
   @Get('info')
   async getUserInfo(@Req() req: Request) {
     const userId = req['currentUser']?.id;
@@ -38,6 +41,7 @@ export class UserController {
     }
   }
 
+ // GET /user/my_quotes :  Fetch all quotes of a user
   @Get('my_quotes')
   async getMyQuotes(@Req() req: Request) {
     const userId = req['currentUser']?.id;
@@ -56,6 +60,9 @@ export class UserController {
     }
   }
 
+  // ---------- POST ----------
+
+  // POST /user/new_quote :  Create a new quote
   @Post('new_quote')
   async createQuote(@Req() req: Request, @Body() body) {
     const userId = req['currentUser']?.id;
@@ -63,11 +70,17 @@ export class UserController {
     return this.userService.createNewQuote(userId, body.quote);
   }
 
+  // ---------- PUT ----------
+
+  // PUT user/quote/edit :  Edit a quote
   @Put('quote/edit')
   async editQuote( @Body() body) {
  return this.userService.editQuote(body.quote_id,body.quote)
   }
 
+  // ---------- DELETE ----------
+  
+  // DELETE user/quote/:id :  Delete a quote by ID
   @Delete('quote/:id')
   async deleteQuote(@Param('id') id: number) {
     return this.userService.deleteQuote(id);
