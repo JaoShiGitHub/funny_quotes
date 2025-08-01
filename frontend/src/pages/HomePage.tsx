@@ -54,7 +54,7 @@ function HomePage(): React.ReactElement {
       <ul className="flex gap-4 flex-wrap">
         {quotes.map((quote) => {
           const hasVoted = quote.voters?.includes(userId);
-          const votes = quote?.voters ? quote?.voters?.length : 0;
+          const votes = quote?.voters[0] ? quote?.voters?.length : 0;
           console.log("check votes", votes);
 
           return (
