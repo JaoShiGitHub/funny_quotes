@@ -23,7 +23,6 @@ constructor(private registerService: RegisterService) {}
       const { username, password } = body;
       try {
         const response = await this.registerService.register(username, password);
-        // console.log("Register checking: ", response);
 
         return res.status(201).json({message: "New user has been created" ,response: response});
       } catch (error) {

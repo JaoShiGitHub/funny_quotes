@@ -3,8 +3,9 @@ import { pool } from 'src/db/database';
 
 @Injectable({})
 export class QuotesService {
+
+  // Get all quotes
   async getQuotes() {
-    // console.log('QuotesService.getQuotes() was called ✅');
 
     const response = await pool.query(`
   SELECT 
@@ -12,7 +13,6 @@ export class QuotesService {
     q.quote,
     u.user_id AS author_id,
     u.username AS author,
-    q.votes AS vote,
     COALESCE(ARRAY_AGG(qv.user_id), '{}') AS voters
   FROM quotes q
   JOIN users u ON q.author_id = u.user_id
@@ -26,6 +26,7 @@ export class QuotesService {
     return response.rows;
   }
 
+  // Insert vote
   async voteQuote(userId: number, quoteId: number) {
     try {
       await pool.query(
