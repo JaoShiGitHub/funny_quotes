@@ -2,7 +2,15 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    fontFamily: {
+      gloriaHallelujah: ["Gloria Hallelujah"],
+      luckiestGuy: ["Luckiest Guy"],
+    },
+    extend: {
+      colors: {
+        background: "#06051d",
+      },
+    },
   },
   plugins: [],
 };
