@@ -7,7 +7,7 @@ function App(): React.ReactElement {
   const auth = useAuth();
 
   return (
-    <div className="bg-background text-zinc-100 min-h-screen">
+    <div className="bg-background text-zinc-100 min-h-screen px-8">
       {auth.isAuthenticated ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </div>
   );
