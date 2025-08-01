@@ -1,5 +1,7 @@
 import React from "react";
 import { useAuth } from "../contexts/Authentication";
+import NavBar from "../layouts/NavBar";
+import SearchBar from "../components/SearchBar";
 
 function HomePage(): React.ReactElement {
   const { logout } = useAuth();
@@ -9,8 +11,10 @@ function HomePage(): React.ReactElement {
   };
 
   return (
-    <div className="text-red-500">
-      Welcome to Home Page
+    <div className="text-slate-100">
+      <NavBar />
+      <SearchBar />
+      <h1> Welcome to Home Page</h1>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );
