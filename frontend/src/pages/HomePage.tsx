@@ -55,9 +55,14 @@ function HomePage(): React.ReactElement {
               key={quote?.quote_id}
               className="border p-4 rounded-lg min-w-[300px] max-w-[300px] min-h-[160px] w-full flex flex-col text-center"
             >
-              <span className="self-end">
-                {quote?.votes} {quote?.votes > 1 ? "Votes" : "Vote"}
-              </span>
+              <div className="flex justify-between mb-4">
+                <button>
+                  <img src="images/heart_plus.svg" className="" />
+                </button>
+                <span>
+                  {quote?.votes} {quote?.votes > 1 ? "Votes" : "Vote"}
+                </span>
+              </div>
               <p className="mb-auto">{quote?.quote}</p>
               <i>- {quote?.author} -</i>
             </li>
