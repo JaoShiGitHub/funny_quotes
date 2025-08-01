@@ -7,6 +7,7 @@ import {
   Body,
   Delete,
   Param,
+  Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/auth/auth.guard';
@@ -60,6 +61,11 @@ export class UserController {
     const userId = req['currentUser']?.id;
 
     return this.userService.createNewQuote(userId, body.quote);
+  }
+
+  @Put('quote/edit')
+  async editQuote( @Body() body) {
+ return this.userService.editQuote(body.quote_id,body.quote)
   }
 
   @Delete('quote/:id')

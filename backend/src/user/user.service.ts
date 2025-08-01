@@ -38,7 +38,20 @@ export class UserService {
     }
   }
 
-  // Delete a quote
+  // Edit quote
+  async editQuote(quote_id: number, quote: string) {
+    try {
+      await pool.query('UPDATE quotes SET quote = $1 WHERE quote_id = $2', [
+        quote,
+        quote_id,
+      ]);
+      return { message: `Quote ${quote_id} updated successfully` };
+    } catch (error) {
+      throw new Error('Could not update quote');
+    }
+  }
+
+  // Delete quote
   async deleteQuote(id: number) {
     const result = await pool.query('DELETE FROM quotes WHERE quote_id = $1', [
       id,
