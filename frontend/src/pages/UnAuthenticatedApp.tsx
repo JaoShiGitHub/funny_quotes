@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import React from "react";
 import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
 
 function UnauthenticatedApp(): React.ReactElement {
   return (
@@ -9,6 +10,7 @@ function UnauthenticatedApp(): React.ReactElement {
         <Route path="*" element={<LoginPage />} />
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </div>
   );
