@@ -1,15 +1,14 @@
 import React from "react";
-
-import NavBar from "./layouts/NavBar";
-import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
 import { useAuth } from "./contexts/Authentication";
+import AuthenticatedApp from "./pages/AuthenticatedApp";
+import UnauthenticatedApp from "./pages/UnAuthenticatedApp";
 
 function App(): React.ReactElement {
+  const auth = useAuth();
+
   return (
-    <div className="bg-background text-zinc-100 min-h-screen">
-      <LoginPage />
+    <div className="App">
+      {auth.isAuthenticated ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </div>
   );
 }
