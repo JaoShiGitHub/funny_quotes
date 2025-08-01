@@ -61,7 +61,7 @@ function HomePage(): React.ReactElement {
   return (
     <div className="text-slate-200 flex flex-col items-center pt-10">
       <Logo />
-      <ul className="flex gap-4 flex-wrap mt-10">
+      <ul className="flex gap-4 flex-wrap mt-10 max-w-[1020px]">
         {quotes.map((quote) => {
           const hasVoted = quote.voters?.includes(userId);
           const votes = quote?.voters[0] ? quote?.voters?.length : 0;
