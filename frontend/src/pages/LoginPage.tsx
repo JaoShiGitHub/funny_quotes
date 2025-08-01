@@ -1,6 +1,7 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/Authentication";
+import FormUser from "../components/Form";
 
 function LoginPage(): React.ReactElement {
   const [username, setUsername] = useState<string>("");
@@ -25,42 +26,21 @@ function LoginPage(): React.ReactElement {
   };
 
   return (
-    <div>
-      <form
-        className="flex flex-col justify-center items-center w-fit gap-y-5"
-        onSubmit={handleLoginSubmit}
-      >
-        <h1 className="text-xl font-extrabold ">Login</h1>
-        <label htmlFor="username">
-          <input
-            type="text"
-            id="username"
-            className="text-black"
-            name="username"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </label>
-        <label htmlFor="password">
-          <input
-            type="text"
-            id="password"
-            className="text-black"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errorMessage || null}
-        <button className="bg-blue-600 px-20">Login</button>
-      </form>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <FormUser
+        title="Login"
+        handleOnSubmit={handleLoginSubmit}
+        username={username}
+        password={password}
+        onChangeUsername={(e) => setUsername(e.target.value)}
+        onChangePassword={(e) => setPassword(e.target.value)}
+      />
       <p>
         Don't have an account?{" "}
-        <button className="" onClick={() => navigate("/register")}>
+        <button
+          className="underline hover:font-extrabold"
+          onClick={() => navigate("/register")}
+        >
           Register
         </button>
       </p>

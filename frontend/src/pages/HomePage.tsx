@@ -17,7 +17,7 @@ type QuotesResponse = {
   quotes_data: Quote[];
 };
 
-const userId: number = 3;
+const userId: number = 4;
 
 function HomePage(): React.ReactElement {
   const [quotes, setQuotes] = useState<Quote[]>([]);
@@ -45,6 +45,19 @@ function HomePage(): React.ReactElement {
     getQuotes();
   }, []);
 
+  const voteQuote = async (quote_id: number): Promise<void> => {
+    try {
+      const result = await axios.post(
+        "http://localhost:4000/quotes/vote",
+        { quote_id },
+        { withCredentials: true }
+      );
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   console.log("quotes: ", quotes);
   return (
     <div className="text-slate-200">
@@ -66,7 +79,7 @@ function HomePage(): React.ReactElement {
                 {hasVoted ? (
                   <span className="text-xl">😂</span>
                 ) : (
-                  <button>
+                  <button onClick={() => voteQuote(quote?.quote_id)}>
                     <img src="images/heart_plus.svg" className="" />
                   </button>
                 )}
