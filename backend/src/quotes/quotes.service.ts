@@ -29,10 +29,18 @@ export class QuotesService {
   // Insert vote
   async voteQuote(userId: number, quoteId: number) {
     try {
-      await pool.query(
-        'INSERT INTO quote_votes (quote_id, user_id) VALUES ($1, $2)',
+   const result =   await pool.query(
+        `INSERT INTO quote_votes (quote_id, user_id)
+         VALUES ($1, $2)
+         ON CONFLICT DO NOTHING`,
         [quoteId, userId],
       );
+
+
+          if (result.rowCount === 0) {
+      // Insert was skipped — user already voted
+      throw new Error('User has already voted.');
+    }
       return { message: 'Vote Successfully' };
     } catch (error) {
       console.error('Voting failed:', error);

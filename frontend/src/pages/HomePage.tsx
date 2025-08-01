@@ -10,11 +10,14 @@ type Quote = {
   quote: string;
   author: string;
   votes: number;
+  voters: number[];
 };
 
 type QuotesResponse = {
   quotes_data: Quote[];
 };
+
+const userId: number = 3;
 
 function HomePage(): React.ReactElement {
   const [quotes, setQuotes] = useState<Quote[]>([]);
@@ -44,23 +47,32 @@ function HomePage(): React.ReactElement {
 
   console.log("quotes: ", quotes);
   return (
-    <div className="text-slate-100">
+    <div className="text-slate-200">
       <NavBar />
       <SearchBar />
-      <h1> Welcome to Home Page</h1>
+      <h1 className="font-luckiestGuy text-4xl"> HAHA QUOTES</h1>
       <ul className="flex gap-4 flex-wrap">
         {quotes.map((quote) => {
+          const hasVoted = quote.voters?.includes(userId);
+          const votes = quote?.voters ? quote?.voters?.length : 0;
+          console.log("check votes", votes);
+
           return (
             <li
               key={quote?.quote_id}
               className="border p-4 rounded-lg min-w-[300px] max-w-[300px] min-h-[160px] w-full flex flex-col text-center"
             >
               <div className="flex justify-between mb-4">
-                <button>
-                  <img src="images/heart_plus.svg" className="" />
-                </button>
+                {hasVoted ? (
+                  <span className="text-xl">😂</span>
+                ) : (
+                  <button>
+                    <img src="images/heart_plus.svg" className="" />
+                  </button>
+                )}
+
                 <span>
-                  {quote?.votes} {quote?.votes > 1 ? "Votes" : "Vote"}
+                  {votes} {votes > 1 ? " Votes" : " Vote"}
                 </span>
               </div>
               <p className="mb-auto">{quote?.quote}</p>
