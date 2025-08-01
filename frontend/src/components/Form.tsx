@@ -51,8 +51,8 @@ function FormUser(props: FormUserProps): React.ReactElement {
           required
         />
       </label>
-      <button className="bg-blue-600 font-bold px-4 py-2 mt-4 mb-10 min-w-80 rounded-md">
-        Login
+      <button className="hover:bg-blue-900 bg-blue-600 font-bold px-4 py-2 mt-4 min-w-80 rounded-md">
+        {title}
       </button>
     </form>
   );

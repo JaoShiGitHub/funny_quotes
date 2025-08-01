@@ -6,10 +6,9 @@ import FormUser from "../components/Form";
 function LoginPage(): React.ReactElement {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, loginErrorMsg } = useAuth();
 
   const handleLoginSubmit = async (
     e: FormEvent<HTMLFormElement>
@@ -21,7 +20,7 @@ function LoginPage(): React.ReactElement {
         password,
       });
     } catch (error) {
-      setErrorMessage("Username or password is incorrect.");
+      console.log(error);
     }
   };
 
@@ -35,7 +34,8 @@ function LoginPage(): React.ReactElement {
         onChangeUsername={(e) => setUsername(e.target.value)}
         onChangePassword={(e) => setPassword(e.target.value)}
       />
-      <p>
+      {loginErrorMsg && <p className="text-red-500 mt-4">{loginErrorMsg}</p>}
+      <p className="mt-12">
         Don't have an account?{" "}
         <button
           className="underline hover:font-extrabold"

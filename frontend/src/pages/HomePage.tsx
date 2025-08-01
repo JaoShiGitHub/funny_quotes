@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/Authentication";
 import NavBar from "../layouts/NavBar";
 import SearchBar from "../components/SearchBar";
 import axios from "axios";
+import Logo from "../components/Logo";
 
 type Quote = {
   quote_id: number;
@@ -60,11 +61,11 @@ function HomePage(): React.ReactElement {
 
   console.log("quotes: ", quotes);
   return (
-    <div className="text-slate-200">
+    <div className="text-slate-200 flex flex-col items-center">
       <NavBar />
       <SearchBar />
-      <h1 className="font-luckiestGuy text-4xl"> HAHA QUOTES</h1>
-      <ul className="flex gap-4 flex-wrap">
+      <Logo />
+      <ul className="flex gap-4 flex-wrap mt-10">
         {quotes.map((quote) => {
           const hasVoted = quote.voters?.includes(userId);
           const votes = quote?.voters[0] ? quote?.voters?.length : 0;
@@ -94,7 +95,12 @@ function HomePage(): React.ReactElement {
           );
         })}
       </ul>
-      <button onClick={handleLogout}>Logout</button>
+      <button
+        className="bg-blue-600 hover:bg-blue-900 font-bold px-4 py-2 mt-10 mb-10 min-w-80 rounded-md"
+        onClick={handleLogout}
+      >
+        Logout
+      </button>
     </div>
   );
 }

@@ -13,6 +13,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   login: (data: LoginData) => Promise<void>;
   logout: () => Promise<void>;
+  loginErrorMsg: string;
 }
 
 interface LoginData {
@@ -29,6 +30,7 @@ interface AuthProviderProps {
 function AuthProvider({ children }: AuthProviderProps) {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [loginErrorMsg, setLoginErrorMsg] = useState<string>("");
 
   const checkAuth = async () => {
     try {
@@ -59,6 +61,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       navigate("/home");
     } catch (error: any) {
       console.log("Login error: ", error.message);
+      setLoginErrorMsg("Username or password is incorrect");
     }
   };
 
@@ -78,7 +81,9 @@ function AuthProvider({ children }: AuthProviderProps) {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, login, logout, loginErrorMsg }}
+    >
       {children}
     </AuthContext.Provider>
   );
