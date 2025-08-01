@@ -61,9 +61,7 @@ function HomePage(): React.ReactElement {
 
   console.log("quotes: ", quotes);
   return (
-    <div className="text-slate-200 flex flex-col items-center">
-      <NavBar />
-      <SearchBar />
+    <div className="text-slate-200 flex flex-col items-center pt-10">
       <Logo />
       <ul className="flex gap-4 flex-wrap mt-10">
         {quotes.map((quote) => {
